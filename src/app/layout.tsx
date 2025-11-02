@@ -1,10 +1,3 @@
-import {
-  ClerkProvider,
-  SignedIn,
-  SignedOut,
-  SignInButton,
-  UserButton,
-} from "@clerk/nextjs";
 import { BotIcon, User2Icon } from "lucide-react";
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
@@ -44,58 +37,44 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-          <ClerkProvider>
-            <div className="m-auto max-w-3xl">
-              <header className="p-8 font-mono">
-                <div className="grid grid-flow-col grid-cols-[auto_1fr]">
+          <div className="m-auto max-w-3xl">
+            <header className="p-8 font-mono">
+              <div className="grid grid-flow-col grid-cols-[auto_1fr]">
+                <div>
+                  <Link href="/">
+                    <BotIcon size={32} />
+                  </Link>
+                </div>
+                <div className="grid grid-flow-col items-center justify-end gap-4">
                   <div>
-                    <Link href="/">
-                      <BotIcon size={32} />
+                    <Link href="/examples">Studio</Link>
+                  </div>
+                  <SwitchingTheme />
+                </div>
+              </div>
+            </header>
+            <div className="min-h-lvh p-8 font-mono">{children}</div>
+            <footer className="p-8 font-mono text-xs">
+              <div className="grid grid-flow-col grid-cols-[auto_1fr]">
+                <div className="grid grid-flow-col gap-4">
+                  <div>
+                    <Link href="#">Privacy Policy</Link>
+                  </div>
+                  <div>
+                    <Link href="#">Terms of Service</Link>
+                  </div>
+                </div>
+                <div className="grid grid-flow-col justify-end gap-4">
+                  <div>
+                    <Link href="#">
+                      <SiX size={12} />
                     </Link>
                   </div>
-                  <div className="grid grid-flow-col items-center justify-end gap-4">
-                    <div>
-                      <Link href="/examples">Studio</Link>
-                    </div>
-                    <SwitchingTheme />
-                    <div className="w-[28px]">
-                      <SignedOut>
-                        <SignInButton>
-                          <Button className="cursor-pointer">
-                            <User2Icon size={28} />
-                          </Button>
-                        </SignInButton>
-                      </SignedOut>
-                      <SignedIn>
-                        <UserButton />
-                      </SignedIn>
-                    </div>
-                  </div>
                 </div>
-              </header>
-              <div className="min-h-lvh p-8 font-mono">{children}</div>
-              <footer className="p-8 font-mono text-xs">
-                <div className="grid grid-flow-col grid-cols-[auto_1fr]">
-                  <div className="grid grid-flow-col gap-4">
-                    <div>
-                      <Link href="#">Privacy Policy</Link>
-                    </div>
-                    <div>
-                      <Link href="#">Terms of Service</Link>
-                    </div>
-                  </div>
-                  <div className="grid grid-flow-col justify-end gap-4">
-                    <div>
-                      <Link href="#">
-                        <SiX size={12} />
-                      </Link>
-                    </div>
-                  </div>
-                </div>
-              </footer>
-            </div>
-            <Tracking gaId={process.env.NEXT_PUBLIC_GA_ID} />
-          </ClerkProvider>
+              </div>
+            </footer>
+          </div>
+          <Tracking gaId={process.env.NEXT_PUBLIC_GA_ID} />
         </ThemeProvider>
       </body>
     </html>
